@@ -9,9 +9,12 @@
 import Foundation
 
 class User {
-    
+    //properties
     var name: String
+    var screenName: String?
+    static var current: User?
     
+    //Create initializer with dictionary
     init(dictionary: [String: Any]) {
         name = dictionary["name"] as! String
 
