@@ -75,7 +75,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="197"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U1g-kw-izy" id="zd2-Er-659">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="196.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="196.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I love tweeting!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epC-Fs-Q5Z">
@@ -90,8 +90,11 @@
                                                         <constraint firstAttribute="height" constant="45" id="7t8-FY-VZU"/>
                                                         <constraint firstAttribute="width" constant="45" id="eP3-fe-Fjq"/>
                                                     </constraints>
-                                                    <state key="normal" image="favor-icon"/>
+                                                    <state key="normal" title="Like" image="favor-icon"/>
                                                     <state key="selected" image="favor-icon-red"/>
+                                                    <connections>
+                                                        <action selector="likeButton:" destination="U1g-kw-izy" eventType="touchUpInside" id="j9E-iF-JIS"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Malvern Madondo" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="stw-gB-74R">
                                                     <rect key="frame" x="66" y="7.9999999999999982" width="138" height="20.333333333333329"/>
@@ -123,7 +126,10 @@
                                                         <constraint firstAttribute="width" constant="45" id="9iu-6g-jKQ"/>
                                                         <constraint firstAttribute="height" constant="45" id="wAE-9q-bL8"/>
                                                     </constraints>
-                                                    <state key="normal" image="reply-icon"/>
+                                                    <state key="normal" title="Reply" image="reply-icon"/>
+                                                    <connections>
+                                                        <action selector="replyButton:" destination="U1g-kw-izy" eventType="touchUpInside" id="E8m-2D-5hZ"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bnk-3g-Gds" userLabel="Retweet">
                                                     <rect key="frame" x="165" y="69.333333333333329" width="45" height="45"/>
@@ -134,7 +140,7 @@
                                                     <state key="normal" title="Button" image="retweet-icon"/>
                                                     <state key="selected" image="retweet-icon-green"/>
                                                     <connections>
-                                                        <action selector="retweetBtn:" destination="5YO-Vh-39k" eventType="touchUpInside" id="yuY-Ty-lQz"/>
+                                                        <action selector="retweetButton:" destination="U1g-kw-izy" eventType="touchUpInside" id="tEV-l1-dDk"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oiD-GQ-4Bj">
@@ -179,7 +185,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="DateLabel" destination="Pn2-qG-akl" id="r0l-x1-LoH"/>
+                                            <outlet property="likesCountLabel" destination="0tz-6N-s5V" id="A5e-mT-g07"/>
+                                            <outlet property="screenNameLabel" destination="stw-gB-74R" id="LLd-89-P1D"/>
                                             <outlet property="tweetTextLabel" destination="epC-Fs-Q5Z" id="ZLP-IG-Wsf"/>
+                                            <outlet property="userHandleLabel" destination="WWp-Zt-NoX" id="2jc-xL-g10"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

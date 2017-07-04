@@ -36,6 +36,7 @@ class Tweet {
         // Format createdAt date string
         let createdAtOriginalString = dictionary["created_at"] as! String
         let formatter = DateFormatter()
+        
         // Configure the input format to parse the date string
         formatter.dateFormat = "E MMM d HH:mm:ss Z y"
         // Convert String to Date

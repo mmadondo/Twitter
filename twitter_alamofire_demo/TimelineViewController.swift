@@ -14,8 +14,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBAction func retweetBtn(_ sender: UIButton) {
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

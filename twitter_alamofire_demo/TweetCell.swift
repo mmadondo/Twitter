@@ -10,7 +10,31 @@ import UIKit
 
 class TweetCell: UITableViewCell {
     
-    @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var tweetTextLabel: UILabel!  //tweet content label
+    
+    @IBOutlet weak var likesCountLabel: UILabel!  // number of likes
+    
+    @IBOutlet weak var DateLabel: UILabel!  //date posted
+  
+    @IBOutlet weak var screenNameLabel: UILabel! //account name appearing on screen
+    
+    @IBOutlet weak var userHandleLabel: UILabel! //aka as username..@handle
+    
+    //user likes tweet
+    @IBAction func likeButton(_ sender: UIButton) {
+        
+    
+    }
+    
+    
+    //user replies tweet
+    @IBAction func replyButton(_ sender: UIButton) {
+    }
+    
+    //user retweets
+    @IBAction func retweetButton(_ sender: UIButton) {
+    }
+    
     
     var tweet: Tweet! {
         didSet {
