@@ -12,11 +12,14 @@ class User {
     //properties
     var name: String
     var screenName: String?
+    var profileImageURL: String
     static var current: User?
     
     //Create initializer with dictionary
     init(dictionary: [String: Any]) {
         name = dictionary["name"] as! String
+        screenName = dictionary["screen_name"] as! String
+        profileImageURL = dictionary["profile_image_url_https"] as! String
 
     }
 }

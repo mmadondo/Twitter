@@ -15,6 +15,8 @@ class TweetCell: UITableViewCell {
     
     @IBOutlet weak var likesCountLabel: UILabel!  // number of likes
     
+    @IBOutlet weak var retweetCount: UILabel! //number of retweets
+    
     @IBOutlet weak var DateLabel: UILabel!  //date posted
     @IBOutlet weak var tweetImageView: UIImageView!
   
@@ -24,7 +26,7 @@ class TweetCell: UITableViewCell {
     
     //user likes tweet
     @IBAction func likeButton(_ sender: UIButton) {
-        print("Liked your tweet!")
+        print(screenNameLabel.text! + "Liked your tweet!")
     
     }
     
@@ -35,15 +37,26 @@ class TweetCell: UITableViewCell {
     
     //user retweets
     @IBAction func retweetButton(_ sender: UIButton) {
+        
+        tweet.retweeted = true
+        tweet.retweetCount += 1
     }
     
     
     var tweet: Tweet! {
         didSet {
+            
             tweetTextLabel.text = tweet.text
+            
             screenNameLabel.text = tweet.user.name
-            tweetImageView.af_setImage(withURL: tweet.user.imageURL!)
-            userHandleLabel.text = "@" + tweet.user.screenName
+            
+            //tweetImageView.af_setImage(withURL: tweet.user.imageURL!)
+            
+            userHandleLabel.text = "@" + (tweet.user.screenName)! //remove !
+            retweetCount.text = String(tweet.retweetCount)
+            
+            likesCountLabel.text = String(tweet.favoriteCount) //remove describing:
+            
             DateLabel.text = tweet.createdAtString
         }
     }

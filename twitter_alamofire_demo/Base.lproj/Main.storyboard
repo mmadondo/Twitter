@@ -187,6 +187,7 @@
                                         <connections>
                                             <outlet property="DateLabel" destination="Pn2-qG-akl" id="r0l-x1-LoH"/>
                                             <outlet property="likesCountLabel" destination="0tz-6N-s5V" id="A5e-mT-g07"/>
+                                            <outlet property="retweetCount" destination="oiD-GQ-4Bj" id="YWG-Q5-XhV"/>
                                             <outlet property="screenNameLabel" destination="stw-gB-74R" id="LLd-89-P1D"/>
                                             <outlet property="tweetImageView" destination="4MD-wJ-HaG" id="C5K-qu-RdS"/>
                                             <outlet property="tweetTextLabel" destination="epC-Fs-Q5Z" id="ZLP-IG-Wsf"/>
