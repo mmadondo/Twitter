@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class TweetCell: UITableViewCell {
     
     @IBOutlet weak var tweetTextLabel: UILabel!  //tweet content label
@@ -15,6 +16,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var likesCountLabel: UILabel!  // number of likes
     
     @IBOutlet weak var DateLabel: UILabel!  //date posted
+    @IBOutlet weak var tweetImageView: UIImageView!
   
     @IBOutlet weak var screenNameLabel: UILabel! //account name appearing on screen
     
@@ -22,7 +24,7 @@ class TweetCell: UITableViewCell {
     
     //user likes tweet
     @IBAction func likeButton(_ sender: UIButton) {
-        
+        print("Liked your tweet!")
     
     }
     
@@ -39,6 +41,10 @@ class TweetCell: UITableViewCell {
     var tweet: Tweet! {
         didSet {
             tweetTextLabel.text = tweet.text
+            screenNameLabel.text = tweet.user.name
+            tweetImageView.af_setImage(withURL: tweet.user.imageURL!)
+            userHandleLabel.text = "@" + tweet.user.screenName
+            DateLabel.text = tweet.createdAtString
         }
     }
     
