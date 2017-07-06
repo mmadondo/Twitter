@@ -15,6 +15,9 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     var tweets: [Tweet] = []
     
+    var isMoreDataLoading = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,20 +29,16 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         // add refresh control to table view
         tableView.insertSubview(refreshControl, at: 0)
         
+        
         tableView.dataSource = self
         tableView.delegate = self
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
-        APIManager.shared.getHomeTimeLine { (tweets, error) in
-            if let tweets = tweets {
-                self.tweets = tweets
-                self.tableView.reloadData()
-            } else if let error = error {
-                print("Error getting home timeline: " + error.localizedDescription)
-            }
-        }
+        
+        loadMoreData()
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,6 +47,10 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+        
+        //        let imageTapped:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TimelineViewController.didTapProfile(_:)))
+        //        imageTapped.numberOfTapsRequired = 1
+        //        cell.profilePhotoView?.addGestureRecognizer(tapped)
         
         cell.tweet = tweets[indexPath.row]
         
@@ -68,25 +71,20 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         APIManager.shared.logout()
     }
     
-    // Makes a network request to get updated data
-    // Updates the tableView with the new data
-    // Hides the RefreshControl
-    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+    func loadMoreData() {
         
-        //        // ... Create the URLRequest `myRequest` ...
+        //        // Initialize a UIRefreshControl
+        //        let refreshControl = UIRefreshControl()
         //
-        //        // Configure session so that completion handler is executed on main UI thread
-        //        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        //        let task: URLSessionDataTask = session.dataTask(with: URLRequest) { (data: Data?, response: URLResponse?, error: Error?) in
+        //        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
         //
-        //            // ... Use the new data to update the data source ...
-        //
-        //            // Reload the tableView now that there is new data
-        //            tableView.reloadData()
-        //
-        //            // Tell the refreshControl to stop spinning
-        //            refreshControl.endRefreshing()
-        //        }
+        //        // add refresh control to table view
+        //        tableView.insertSubview(refreshControl, at: 0)
+        
+        // Update flag
+        //        self.isMoreDataLoading = false
+        
+        // ... Use the new data to update the data source ...
         
         APIManager.shared.getHomeTimeLine { (tweets, error) in
             if let tweets = tweets {
@@ -98,13 +96,73 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         // Reload the tableView now that there is new data
-        tableView.reloadData()
+        //tableView.reloadData()
+        
+    }
+    
+    
+    
+    // Makes a network request to get updated data
+    // Updates the tableView with the new data
+    // Hides the RefreshControl
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        
+        loadMoreData()
         
         // Tell the refreshControl to stop spinning
         refreshControl.endRefreshing()
         
-      //  task.resume()
     }
+    
+    
+    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    //        if (!isMoreDataLoading) {
+    //            // Calculate the position of one screen length before the bottom of the results
+    //            let scrollViewContentHeight = tableView.contentSize.height
+    //            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+    //
+    //            // When the user has scrolled past the threshold, start requesting
+    //            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+    //                isMoreDataLoading = true
+    //
+    //                // ... Code to load more results ...
+    //                // Reload the tableView now that there is new data
+    //                tableView.reloadData()
+    //                print("loading more data")
+    //            }
+    //        }
+    //    }
+    
+    //    @IBAction func composeTweet(_ sender: UIBarButtonItem) {
+    //        performSegue(withIdentifier: "composeSegue", sender: self)
+    //    }
+    //
+    //    func did(post: Tweet) {
+    //        tweets.insert(post, at: 0)
+    //        tableView.reloadData()
+    //    }
+    //
+    //    func didTapProfile(_ sender: UITapGestureRecognizer) {
+    //        let indexPath = sender.view?.tag
+    //        let tweet = tweets[indexPath!]
+    //        tappedUser = tweet.user
+    //
+    //        performSegue(withIdentifier: "profileSegue", sender: nil)
+    //
+    //    }
+    //
+    //
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //        if segue.identifier == "composeSegue" {
+    //            let composeViewController = segue.destination as! ComposeViewController
+    //            composeViewController.delegate = self
+    //        }
+    //        else if segue.identifier == "profileSegue" {
+    //            let profileViewController = segue.destination as! ProfileViewController
+    //            profileViewController.user = tappedUser
+    //        }
+    //    }
+    
     
     /*
      // MARK: - Navigation
