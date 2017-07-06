@@ -8,7 +8,6 @@
 
 import UIKit
 import Prephirences
-//import Preferences
 
 class LoginViewController: UIViewController {
     

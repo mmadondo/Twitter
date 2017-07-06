@@ -95,27 +95,37 @@ class TweetCell: UITableViewCell {
     //user likes tweet
     @IBAction func likeButton(_ sender: UIButton) {
         
-        let onLikeButtonPress = sender as! UIButton
+        let onLikeButtonPress = sender
         //print("You liked " + screenNameLabel.text! + "'s tweet")
         
         if onLikeButtonPress.isSelected{
+            
             tweet.favorited = false
-            tweet.favoriteCount -= 1
-            //onLikeButtonPress.setImage(UIImage(named: "favor-icon"), for: .normal)
+            
+            if tweet.favoriteCount > 0 {
+                
+                tweet.favoriteCount -= 1 //to avoid negative count
+            }
+            
+            
+            
             likesCountLabel.text = String(tweet.favoriteCount)
+            
             APIManager.shared.unfavorite(tweet) { (tweet: Tweet?, error: Error?) in
                 if let  error = error {
                     print("Error unfavoriting tweet: \(error.localizedDescription)")
                 } else if let tweet = tweet {
+                    
+                    onLikeButtonPress.setImage(UIImage(named: "favor-icon"), for: .normal)
                     print("You unfavorited the following Tweet: \n\(tweet.text)")
                 }
             }
+            
         } else {
             
             tweet.favorited = true
             tweet.favoriteCount += 1
             self.likesCountLabel.text = String(tweet.favoriteCount)
-            //onLikeButtonPress.setImage(UIImage(named: "favor-icon-red"), for: .normal)
             
             APIManager.shared.favorite(tweet) { (tweet: Tweet?, error: Error?) in
                 if let  error = error {
@@ -123,7 +133,7 @@ class TweetCell: UITableViewCell {
                     print("Error favoriting tweet: \(error.localizedDescription)")
                     
                 } else if let tweet = tweet {
-                    
+                    onLikeButtonPress.setImage(UIImage(named: "favor-icon-red"), for: .normal)
                     print("Successfully favorited the following Tweet: \n\(tweet.text)")
                 }
             }
@@ -142,36 +152,42 @@ class TweetCell: UITableViewCell {
     
     //user retweets
     @IBAction func retweetButton(_ sender: UIButton) {
-        let onRetweetBtnPress = sender as! UIButton
+        
+        let onRetweetBtnPress = sender
         
         if onRetweetBtnPress.isSelected{
             
             tweet.retweeted = false
             
-            tweet.retweetCount -= 1
-            retweetCountLabel.text = String(tweet.retweetCount)
+            if tweet.retweetCount > 0 {
+                tweet.retweetCount -= 1
+            }
             
-            //onRetweetBtnPress.setImage(UIImage(named: "retweet-icon"), for: .normal)
+            retweetCountLabel.text = String(tweet.retweetCount)
             
             APIManager.shared.unretweet(tweet) { (tweet: Tweet?, error: Error?) in
                 if let  error = error {
                     print("Error unretweeting tweet: \(error.localizedDescription)")
                 } else if let tweet = tweet {
-                    print("Successfully retweeted the following Tweet: \n\(tweet.text)")
+                    onRetweetBtnPress.setImage(UIImage(named: "retweet-icon"), for: .normal)
+                    print("You unretweeted the following Tweet: \n\(tweet.text)")
                 }
             }
         } else {
             tweet.retweeted = true
             
             tweet.retweetCount += 1
-            retweetCountLabel.text = String(tweet.retweetCount)
             
-            //onRetweetBtnPress.setImage(UIImage(named: "retweet-icon-green"), for: .normal)
+            retweetCountLabel.text = String(tweet.retweetCount)
             
             APIManager.shared.retweet(tweet) { (tweet: Tweet?, error: Error?) in
                 if let  error = error {
+                    
                     print("Error retweeting tweet: \(error.localizedDescription)")
+                    
                 } else if let tweet = tweet {
+                    
+                    onRetweetBtnPress.setImage(UIImage(named: "retweet-icon-green"), for: .normal)
                     print("Successfully retweeted the following Tweet: \n\(tweet.text)")
                 }
             }

@@ -8,8 +8,7 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, ComposeViewControllerDelegate{
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -111,58 +110,46 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Tell the refreshControl to stop spinning
         refreshControl.endRefreshing()
-        
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+                isMoreDataLoading = true
+                
+                // ... Code to load more results ...
+                // Reload the tableView now that there is new data
+                loadMoreData()
+                
+                //tableView.reloadData()
+                print("loading more data")
+            }
+        }
+    }
     
-    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    //        if (!isMoreDataLoading) {
-    //            // Calculate the position of one screen length before the bottom of the results
-    //            let scrollViewContentHeight = tableView.contentSize.height
-    //            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
-    //
-    //            // When the user has scrolled past the threshold, start requesting
-    //            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
-    //                isMoreDataLoading = true
-    //
-    //                // ... Code to load more results ...
-    //                // Reload the tableView now that there is new data
-    //                tableView.reloadData()
-    //                print("loading more data")
-    //            }
-    //        }
-    //    }
+    func did(post: Tweet) {
+        tweets.insert(post, at: 0) //see tweet first
+        tableView.reloadData()     //reload
+    }
     
-    //    @IBAction func composeTweet(_ sender: UIBarButtonItem) {
-    //        performSegue(withIdentifier: "composeSegue", sender: self)
-    //    }
-    //
-    //    func did(post: Tweet) {
-    //        tweets.insert(post, at: 0)
-    //        tableView.reloadData()
-    //    }
-    //
-    //    func didTapProfile(_ sender: UITapGestureRecognizer) {
-    //        let indexPath = sender.view?.tag
-    //        let tweet = tweets[indexPath!]
-    //        tappedUser = tweet.user
-    //
-    //        performSegue(withIdentifier: "profileSegue", sender: nil)
-    //
-    //    }
-    //
-    //
+    @IBAction func composeTweet(_ sender: UIButton) {
+        // performSegue(withIdentifier: "composeSegue", sender: self)
+    }
+    
     //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if segue.identifier == "composeSegue" {
-    //            let composeViewController = segue.destination as! ComposeViewController
-    //            composeViewController.delegate = self
+    //
+    //        if segue.identifier == "composeSegue"{
+    //            let destination = segue.destination as! ComposeViewController
+    //
+    //            destination.delegate = self
     //        }
-    //        else if segue.identifier == "profileSegue" {
-    //            let profileViewController = segue.destination as! ProfileViewController
-    //            profileViewController.user = tappedUser
-    //        }
-    //    }
     
+    //        }
     
     /*
      // MARK: - Navigation

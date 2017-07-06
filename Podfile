@@ -10,6 +10,7 @@ target 'twitter_alamofire_demo' do
   pod 'AlamofireImage', '~> 3.1'
   pod 'OAuthSwift', '~> 1.1.0'
   pod 'OAuthSwiftAlamofire'
+  pod 'RSKPlaceholderTextView'
   pod 'Prephirences'
   pod 'KeychainAccess'
 

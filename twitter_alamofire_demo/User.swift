@@ -15,7 +15,6 @@ class User {
     var screenName: String
     var profileImageURL: String!
     
-    
     //Create initializer with dictionary
     init(dictionary: [String: Any]) {
         
@@ -24,6 +23,8 @@ class User {
         screenName = dictionary["screen_name"] as! String
         
         profileImageURL = dictionary["profile_image_url_https"] as! String
+        
+        self.dictionary = dictionary
         
     }
     
@@ -71,4 +72,35 @@ class User {
     //            Tweet(dictionary: dictionary)
     //        })
     // }
+    
+    
+    //    @IBAction func composeTweet(_ sender: UIBarButtonItem) {
+    //        performSegue(withIdentifier: "composeSegue", sender: self)
+    //    }
+    //
+    //    func did(post: Tweet) {
+    //        tweets.insert(post, at: 0)
+    //        tableView.reloadData()
+    //    }
+    //
+    //    func didTapProfile(_ sender: UITapGestureRecognizer) {
+    //        let indexPath = sender.view?.tag
+    //        let tweet = tweets[indexPath!]
+    //        tappedUser = tweet.user
+    //
+    //        performSegue(withIdentifier: "profileSegue", sender: nil)
+    //
+    //    }
+    //
+    //
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //        if segue.identifier == "composeSegue" {
+    //            let composeViewController = segue.destination as! ComposeViewController
+    //            composeViewController.delegate = self
+    //        }
+    //        else if segue.identifier == "profileSegue" {
+    //            let profileViewController = segue.destination as! ProfileViewController
+    //            profileViewController.user = tappedUser
+    //        }
+    //    }
 }
