@@ -59,22 +59,22 @@ class TweetCell: UITableViewCell {
             
             DateLabel.text = tweet.createdAtString
             
-            //for favorite/like
-            if tweet.favorited == true {
-                likeButton.isSelected = true
-            }
-            else {
-                likeButton.isSelected = false
-            }
-            
-            //for retweet
-            
-            if tweet.retweeted == true {
-                retweetButton.isSelected = true
-            }
-            else {
-                retweetButton.isSelected = false
-            }
+//            //for favorite/like
+//            if tweet.favorited == true {
+//                likeButton.isSelected = true
+//            }
+//            else {
+//                likeButton.isSelected = false
+//            }
+//            
+//            //for retweet
+//            
+//            if tweet.retweeted == true {
+//                retweetButton.isSelected = true
+//            }
+//            else {
+//                retweetButton.isSelected = false
+//            }
             
         }
     }
@@ -98,9 +98,10 @@ class TweetCell: UITableViewCell {
         let onLikeButtonPress = sender
         //print("You liked " + screenNameLabel.text! + "'s tweet")
         
-        if onLikeButtonPress.isSelected{
+        if onLikeButtonPress.isSelected == true {
             
             tweet.favorited = false
+            onLikeButtonPress.isSelected = false
             
             if tweet.favoriteCount > 0 {
                 
@@ -119,11 +120,13 @@ class TweetCell: UITableViewCell {
                     onLikeButtonPress.setImage(UIImage(named: "favor-icon"), for: .normal)
                     print("You unfavorited the following Tweet: \n\(tweet.text)")
                 }
+                
             }
             
         } else {
             
             tweet.favorited = true
+            onLikeButtonPress.isSelected = true
             tweet.favoriteCount += 1
             self.likesCountLabel.text = String(tweet.favoriteCount)
             
@@ -155,9 +158,10 @@ class TweetCell: UITableViewCell {
         
         let onRetweetBtnPress = sender
         
-        if onRetweetBtnPress.isSelected{
+        if onRetweetBtnPress.isSelected == true {
             
             tweet.retweeted = false
+            onRetweetBtnPress.isSelected = false
             
             if tweet.retweetCount > 0 {
                 tweet.retweetCount -= 1
@@ -175,6 +179,7 @@ class TweetCell: UITableViewCell {
             }
         } else {
             tweet.retweeted = true
+            onRetweetBtnPress.isSelected = true
             
             tweet.retweetCount += 1
             

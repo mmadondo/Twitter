@@ -15,6 +15,10 @@ class User {
     var screenName: String
     var profileImageURL: String!
     
+    var dictionary: [String: Any]?
+    
+    private static var _current: User?
+    
     //Create initializer with dictionary
     init(dictionary: [String: Any]) {
         
@@ -27,11 +31,7 @@ class User {
         self.dictionary = dictionary
         
     }
-    
-    var dictionary: [String: Any]?
-    
-    private static var _current: User?
-    
+
     static var current: User? {
         get {
             if _current == nil {

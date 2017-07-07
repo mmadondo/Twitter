@@ -17,7 +17,7 @@ protocol ComposeViewControllerDelegate: class {
 
 class ComposeViewController: UIViewController {
     
-    weak var delegate: ComposeViewController?
+    weak var delegate: ComposeViewControllerDelegate?
     
     var user: User!
     var profilePic: UIImage!
@@ -36,16 +36,12 @@ class ComposeViewController: UIViewController {
     }
     
     @IBAction func onTapPost(_ sender: Any) {
-        APIManager.shared.composeTweet(with: tweetText.text) { (tweet, error) in
-            
-            //let post = self.tweetText.text
-            
-            if let error = error {
-                print("Error composing Tweet: \(error.localizedDescription)")
-            } else if let tweet = tweet {
-                // self.delegate?.did(post: tweet)
-                print(tweet)
-                print("Compose Tweet Success!")
+        APIManager.shared.composeTweet(with: tweetText.text) { (tweet: Tweet?, error: Error?) in
+            if let error = error{
+                print("Error composing tweet: \(error.localizedDescription)")
+            } else if let tweet = tweet{
+                self.delegate?.did(post: tweet)
+                print("Compose tweet success!!")
             }
         }
     }
@@ -72,10 +68,13 @@ class ComposeViewController: UIViewController {
         profileImage.layer.masksToBounds = true
         
         
-        self.tweetText = RSKPlaceholderTextView(frame: CGRect(x: 0, y: 100, width: self.view.frame.width, height: 100))
+        //self.tweetText = RSKPlaceholderTextView(frame: CGRect(x: 0, y: 100, width: self.view.frame.width, height: 100))
         
-        self.tweetText.text = "What's happening?"
+        //self.tweetText.text = "What's happening?"
         
+        let color: UIColor = UIColor.darkGray
+        tweetText.layer.borderColor = color.cgColor
+        tweetText.layer.borderWidth = 1
         
         self.view.addSubview(self.tweetText)
     }

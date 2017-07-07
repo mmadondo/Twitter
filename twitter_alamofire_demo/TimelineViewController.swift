@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, ComposeViewControllerDelegate{
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, ComposeViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -133,23 +133,23 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func did(post: Tweet) {
-        tweets.insert(post, at: 0) //see tweet first
-        tableView.reloadData()     //reload
+        //tweets.insert(post, at: 0) //see tweet first
+        //tableView.reloadData()     //reload
     }
     
     @IBAction func composeTweet(_ sender: UIButton) {
         // performSegue(withIdentifier: "composeSegue", sender: self)
     }
     
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //
-    //        if segue.identifier == "composeSegue"{
-    //            let destination = segue.destination as! ComposeViewController
-    //
-    //            destination.delegate = self
-    //        }
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     
-    //        }
+            if segue.identifier == "composeSegue"{
+                let destination = segue.destination as! ComposeViewController
+    
+                destination.delegate = self
+            }
+    
+            }
     
     /*
      // MARK: - Navigation
