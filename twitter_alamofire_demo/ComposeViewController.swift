@@ -41,6 +41,7 @@ class ComposeViewController: UIViewController {
                 print("Error composing tweet: \(error.localizedDescription)")
             } else if let tweet = tweet{
                 self.delegate?.did(post: tweet)
+                //self.dismiss(animated: true, completion: nil)
                 print("Compose tweet success!!")
             }
         }

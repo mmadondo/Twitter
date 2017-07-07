@@ -72,17 +72,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     func loadMoreData() {
         
-        //        // Initialize a UIRefreshControl
-        //        let refreshControl = UIRefreshControl()
-        //
-        //        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
-        //
-        //        // add refresh control to table view
-        //        tableView.insertSubview(refreshControl, at: 0)
-        
-        // Update flag
-        //        self.isMoreDataLoading = false
-        
         // ... Use the new data to update the data source ...
         
         APIManager.shared.getHomeTimeLine { (tweets, error) in
@@ -133,23 +122,23 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func did(post: Tweet) {
-        //tweets.insert(post, at: 0) //see tweet first
-        //tableView.reloadData()     //reload
+        //        tweets.insert(post, at: 0) //see tweet first
+        //        tableView.reloadData()     //reload
     }
     
     @IBAction func composeTweet(_ sender: UIButton) {
-        // performSegue(withIdentifier: "composeSegue", sender: self)
+        //  performSegue(withIdentifier: "composeSegue", sender: self)
     }
     
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
-            if segue.identifier == "composeSegue"{
-                let destination = segue.destination as! ComposeViewController
-    
-                destination.delegate = self
-            }
-    
-            }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "composeSegue"{
+            let destination = segue.destination as! ComposeViewController
+            
+            destination.delegate = self
+        }
+        
+    }
     
     /*
      // MARK: - Navigation

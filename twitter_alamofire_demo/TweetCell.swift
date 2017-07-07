@@ -3,6 +3,7 @@
 //  twitter_alamofire_demo
 //
 //  Created by Charles Hieger on 6/18/17.
+//  Modified by Malvern Madondo on 7/5/17
 //  Copyright © 2017 Charles Hieger. All rights reserved.
 //
 
@@ -11,18 +12,18 @@ import AlamofireImage
 
 class TweetCell: UITableViewCell {
     
-    @IBOutlet weak var tweetTextLabel: UILabel!  //tweet content label
+    @IBOutlet weak var tweetTextLabel: UILabel!     //tweet content label
     
-    @IBOutlet weak var likesCountLabel: UILabel!  // number of likes
+    @IBOutlet weak var likesCountLabel: UILabel!    // number of likes
     
-    @IBOutlet weak var retweetCountLabel: UILabel! //number of retweets
+    @IBOutlet weak var retweetCountLabel: UILabel!  //number of retweets
     
-    @IBOutlet weak var DateLabel: UILabel!  //date posted
+    @IBOutlet weak var DateLabel: UILabel!          //date posted
     @IBOutlet weak var tweetImageView: UIImageView!
     
-    @IBOutlet weak var screenNameLabel: UILabel! //account name appearing on screen
+    @IBOutlet weak var screenNameLabel: UILabel!    //account name appearing on screen
     
-    @IBOutlet weak var userHandleLabel: UILabel! //aka as username..@handle
+    @IBOutlet weak var userHandleLabel: UILabel!    //aka as username..@handle
     
     //Button Outlets
     
@@ -59,23 +60,6 @@ class TweetCell: UITableViewCell {
             
             DateLabel.text = tweet.createdAtString
             
-//            //for favorite/like
-//            if tweet.favorited == true {
-//                likeButton.isSelected = true
-//            }
-//            else {
-//                likeButton.isSelected = false
-//            }
-//            
-//            //for retweet
-//            
-//            if tweet.retweeted == true {
-//                retweetButton.isSelected = true
-//            }
-//            else {
-//                retweetButton.isSelected = false
-//            }
-            
         }
     }
     
@@ -90,7 +74,7 @@ class TweetCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    //------------------------real stuff happens below----------------------------
+    //------------------------ACTIONS----------------------------
     
     //user likes tweet
     @IBAction func likeButton(_ sender: UIButton) {
@@ -107,7 +91,6 @@ class TweetCell: UITableViewCell {
                 
                 tweet.favoriteCount -= 1 //to avoid negative count
             }
-            
             
             
             likesCountLabel.text = String(tweet.favoriteCount)
@@ -150,7 +133,7 @@ class TweetCell: UITableViewCell {
     //user replies tweet
     @IBAction func replyButton(_ sender: UIButton) {
         
-        
+        //REPLY action here
     }
     
     //user retweets
@@ -178,6 +161,7 @@ class TweetCell: UITableViewCell {
                 }
             }
         } else {
+            
             tweet.retweeted = true
             onRetweetBtnPress.isSelected = true
             
